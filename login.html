@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <script>
+        const obfuscatedPassword = "U2FsdGVkX1+0v51x0q9kDA=="; // Base64 or simple encoding
+
+        function decodePassword(encoded) {
+            return atob(encoded);
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById("password").value;
+            const correctPassword = decodePassword(obfuscatedPassword);
+            if (passwordInput === correctPassword) {
+                document.getElementById("protectedContent").style.display = "block";
+                document.getElementById("loginForm").style.display = "none";
+            } else {
+                alert("Incorrect password. Please try again.");
+            }
+        }
+    </script>
+    <style>
+        #protectedContent {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginForm">
+        <h2>Please enter the password:</h2>
+        <input type="password" id="password" required>
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    
+    <div id="protectedContent">
+        <h1>Protected Content</h1>
+        <p>This is the content that is password protected.</p>
+        <button onclick="window.location.href='index.html';">Go Back to Main Page</button>
+    </div>
+</body>
+</html>
